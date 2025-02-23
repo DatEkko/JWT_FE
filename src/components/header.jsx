@@ -21,12 +21,12 @@ const HeaderComponent = () => {
             icon: <SettingOutlined />,
             children: [
                 {
-                    label: <Link to={"/register"}>Đăng Nhập</Link>,
-                    key: 'login',
+                    label: <Link to={"/register"}>Đăng Ký</Link>,
+                    key: 'register',
                 },
                 {
-                    label: 'Đăng xuất',
-                    key: 'logout',
+                    label: <Link to={"/login"}>Đăng Nhập</Link>,
+                    key: 'login',
                 },
             ],
         },
