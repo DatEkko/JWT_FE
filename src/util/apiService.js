@@ -16,6 +16,11 @@ const loginService = (email, password) => {
     return axios.post(URL_API, data)
 }
 
+const getAllUser = () => {
+    const URL_API = "/v1/api/users";
+    return axios.get(URL_API)
+}
+
 export {
-    createUserService, loginService
+    createUserService, loginService, getAllUser
 }

@@ -2,21 +2,35 @@ import React from 'react';
 import { Button, Form, Input, notification } from 'antd';
 import { loginService } from '../util/apiService';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../components/auth.context';
+import { useContext } from 'react';
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const { setAuth } = useContext(AuthContext);
     const onFinish = async (values) => {
         const { email, password } = values;
 
         const res = await loginService(email, password);
 
         if (res && res.EC === 0) {
-            localStorage.setItem("access_token", res.access_token)
+            localStorage.setItem("access_token", res.access_token);
+
+            setAuth({
+                isAuthenticated: true,
+                user: {
+                    email: res.user?.email ?? "",
+                    name: res.user?.name ?? "",
+                }
+            });
+
             notification.success({
                 message: "LOGIN SUCCESS",
                 description: "Success"
-            })
-            navigate("/")
+            });
+
+            navigate("/");
+
         } else {
             notification.error({
                 message: "LOGIN FAIL",
